@@ -1,1 +1,3 @@
 
+- name: start nginx server
+  shell: "/app/scripts/bin/start_{{ app }}.sh"
