@@ -1,0 +1,20 @@
+---
+- name: 发布
+  hosts: "{{ ip | default(app_name) }}"
+  gather_facts: false
+  tasks:
+  - name: 定义 app 
+    set_fact:
+      app: "{{ app_name.split('_')[1] }}"
+
+  - name: 获取服务的参数，该参数只包含job中定义的指定的业务模块的内容
+    set_fact:
+      service: "{{ item }}"
+    when: item.g_module_type == 'nginx' and app == item.bk_module_name
+    loop: "{{ modules  }}"
+    
+  - name: 启动 nginx 服务
+    include_role: 
+      name: app_service
+    vars:
+      action: start_nginx_app
