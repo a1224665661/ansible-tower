@@ -1,7 +1,7 @@
 ---
 - name: 发布
 #  hosts: "{{ ip | default(app_name) }}"
-  hosts: 192.168.227.128
+  hosts: 192.168.227.129
   gather_facts: false
   tasks:
 #  - name: 定义 app 
